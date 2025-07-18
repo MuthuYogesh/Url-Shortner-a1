@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1",
+    "nanoid": "^5.1.5",
+    "nodemon": "3.1.10",
+    "redis": "^5.6.0",
+    "router": "^2.2.0"
+  }
+}

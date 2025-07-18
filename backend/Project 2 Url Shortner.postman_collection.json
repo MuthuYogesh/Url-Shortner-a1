@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "621f430c-ac8f-4ce3-baf7-9dbde8cc98cd",
+		"name": "Project 2 Url Shortner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45932635"
+	},
+	"item": [
+		{
+			"name": "get Url",
+			"item": [
+				{
+					"name": "get Url 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/loUlg1R",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"loUlg1R"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Url 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/tunJe7a",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tunJe7a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Url 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/iL7XF24",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"iL7XF24"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Url Shorten",
+			"item": [
+				{
+					"name": "Url Shorten 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"longurl\":\"www.snapchat.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Url Shorten 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"longurl\":\"https://www.amazon.com/Skytech-Gaming-PC-Desktop-Windows/dp/B0BXCJVKHF/\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Url Shorten 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"longurl\":\"https://www.amazon.com/Invicta-8926OB-Stainless-Automatic-Bracelet/dp/B000JQFX1G/?_encoding=UTF8&ref_=pd_hp_d_btf_nta-top-picks\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
