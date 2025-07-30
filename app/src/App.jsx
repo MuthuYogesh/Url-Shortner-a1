@@ -13,7 +13,7 @@ export default function App() {
       return;
     }
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/`, { url }, { headers: { "content-type": "application/json" } });
+      const response = await axios.post(import.meta.env.VITE_API_URL, { url }, { headers: { "content-type": "application/json" } });
       // console.log(response.data);
       setShortUrl(response.data);
     } catch (err) {

@@ -25,7 +25,7 @@ app.use(cors({
             callback(null, false);   // ❌ Reject silently
         }
     },
-    credentials: true,
+    credentials: false,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }));
@@ -41,7 +41,7 @@ app.options(/.*/, cors({
         if (allowed) callback(null, origin);
         else callback(null, false);
     },
-    credentials: true,
+    credentials: false,
 }));
 
 app.use(express.json());
