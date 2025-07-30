@@ -17,13 +17,13 @@ app.use(cors({
 
         const allowed = allowedOrigins.some((url) => {
             return origin.toLowerCase() === url.toLowerCase()
-                || (url.includes('localhost') && origin.includes('localhost')); // allow any localhost
+                || (url.includes('localhost') && origin.includes('localhost'));
         });
 
         if (allowed) {
-            callback(null, true);
+            callback(null, true);  // ✅ allow
         } else {
-            callback(new Error("CORS not allowed"));
+            callback(null, false); // ❌ reject silently
         }
     },
     credentials: true,
