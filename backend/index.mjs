@@ -33,7 +33,7 @@ app.use(cors({
 
 // console.log("Problem::<1>")
 
-app.options(/.*/, cors());  // app.options("*", cors());  works in Express 4 not in 5+
+app.options("/*", cors());  // app.options("*", cors());  works in Express 4 not in 5+
 
 // console.log("Problem::<2>")
 
