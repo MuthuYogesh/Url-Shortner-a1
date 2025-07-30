@@ -11,43 +11,45 @@ app.use(express.json());
 const allowedOrigins = [feUrlDev, feUrlProd];
 
 app.use(cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true); // allow server-to-server/curl
+
+        const allowed = allowedOrigins.some((url) =>
+            origin.toLowerCase() === url.toLowerCase() ||
+            (url.includes('localhost') && origin.includes('localhost'))
+        );
+
+        if (allowed) {
+            callback(null, origin);  // ✅ Respond with the exact origin
+        } else {
+            callback(null, false);   // ❌ Reject silently
+        }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
+// Handle OPTIONS for Express 5
 app.options(/.*/, cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        const allowed = allowedOrigins.some((url) =>
+            origin.toLowerCase() === url.toLowerCase() ||
+            (url.includes('localhost') && origin.includes('localhost'))
+        );
+        if (allowed) callback(null, origin);
+        else callback(null, false);
+    },
     credentials: true,
 }));
+
+app.use(express.json());
 
 app.use((req, res, next) => {
     console.log("Incoming:", req.method, req.path, "Origin:", req.headers.origin);
     next();
 });
-
-
-// It allows Cross Origin Requests
-// app.use(cors({
-//     origin: (origin, callback) => {
-//         if (!origin) return callback(null, true); // allow mobile apps or curl
-
-//         const allowed = allowedOrigins.some((url) => {
-//             return origin.toLowerCase() === url.toLowerCase()
-//                 || (url.includes('localhost') && origin.includes('localhost'));
-//         });
-
-//         if (allowed) {
-//             callback(null, true);  // ✅ allow
-//         } else {
-//             callback(null, false); // ❌ reject silently
-//         }
-//     },
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-// }));
 
 // console.log("Problem::<1>")
 
