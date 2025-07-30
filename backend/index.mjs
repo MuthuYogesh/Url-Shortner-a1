@@ -10,30 +10,48 @@ app.use(express.json());
 
 const allowedOrigins = [feUrlDev, feUrlProd];
 
-// It allows Cross Origin Requests
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin) return callback(null, true); // allow mobile apps or curl
-
-        const allowed = allowedOrigins.some((url) => {
-            return origin.toLowerCase() === url.toLowerCase()
-                || (url.includes('localhost') && origin.includes('localhost'));
-        });
-
-        if (allowed) {
-            callback(null, true);  // ✅ allow
-        } else {
-            callback(null, false); // ❌ reject silently
-        }
-    },
+    origin: allowedOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
+app.options(/.*/, cors({
+    origin: allowedOrigins,
+    credentials: true,
+}));
+
+app.use((req, res, next) => {
+    console.log("Incoming:", req.method, req.path, "Origin:", req.headers.origin);
+    next();
+});
+
+
+// It allows Cross Origin Requests
+// app.use(cors({
+//     origin: (origin, callback) => {
+//         if (!origin) return callback(null, true); // allow mobile apps or curl
+
+//         const allowed = allowedOrigins.some((url) => {
+//             return origin.toLowerCase() === url.toLowerCase()
+//                 || (url.includes('localhost') && origin.includes('localhost'));
+//         });
+
+//         if (allowed) {
+//             callback(null, true);  // ✅ allow
+//         } else {
+//             callback(null, false); // ❌ reject silently
+//         }
+//     },
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+// }));
+
 // console.log("Problem::<1>")
 
-app.options(/.*/, cors());  // app.options("*", cors());  works in Express 4 not in 5+
+// app.options(/.*/, cors());  // app.options("*", cors());  works in Express 4 not in 5+
 
 // console.log("Problem::<2>")
 
