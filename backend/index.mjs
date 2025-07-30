@@ -13,18 +13,23 @@ const allowedOrigins = [feUrlDev, feUrlProd];
 // It allows Cross Origin Requests
 app.use(cors({
     origin: (origin, callback) => {
-        // Allow requests with no origin (like mobile apps or curl)
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin) return callback(null, true); // allow mobile apps or curl
+
+        const allowed = allowedOrigins.some((url) => {
+            return origin.toLowerCase() === url.toLowerCase()
+                || (url.includes('localhost') && origin.includes('localhost')); // allow any localhost
+        });
+
+        if (allowed) {
             callback(null, true);
         } else {
             callback(new Error("CORS not allowed"));
         }
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // allow preflight
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-})
-);
+}));
 
 // console.log("Problem::<1>")
 
