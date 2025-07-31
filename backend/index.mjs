@@ -18,43 +18,43 @@ app.use(express.json());
 
 const allowedOrigins = [feUrlDev, feUrlProd];
 
-app.use((req, res, next) => {
-    if (req.method === 'OPTIONS') {
-        const origin = req.headers.origin;
-        const allowed = !origin || allowedOrigins.some(
-            (url) =>
-                origin.toLowerCase() === url.toLowerCase() ||
-                (url.includes('localhost') && origin.includes('localhost'))
-        );
+// app.use((req, res, next) => {
+//     if (req.method === 'OPTIONS') {
+//         const origin = req.headers.origin;
+//         const allowed = !origin || allowedOrigins.some(
+//             (url) =>
+//                 origin.toLowerCase() === url.toLowerCase() ||
+//                 (url.includes('localhost') && origin.includes('localhost'))
+//         );
 
-        if (allowed) {
-            res.setHeader('Access-Control-Allow-Origin', origin || '*');
-            res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-            res.status(204).end(); // Preflight success
-            return;
-        } else {
-            res.status(403).end(); // Forbidden
-            return;
-        }
-    }
-    next();
-});
+//         if (allowed) {
+//             res.setHeader('Access-Control-Allow-Origin', origin || '*');
+//             res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+//             res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//             res.status(204).end(); // Preflight success
+//             return;
+//         } else {
+//             res.status(403).end(); // Forbidden
+//             return;
+//         }
+//     }
+//     next();
+// });
 
 app.use(
     cors({
-        origin: (origin, callback) => {
-            if (!origin) return callback(null, true); // Server-to-server requests
+        origin: "*",//(origin, callback) => {
+        //     if (!origin) return callback(null, true); // Server-to-server requests
 
-            const allowed = allowedOrigins.some(
-                (url) =>
-                    origin.toLowerCase() === url.toLowerCase() ||
-                    (url.includes('localhost') && origin.includes('localhost'))
-            );
+        //     const allowed = allowedOrigins.some(
+        //         (url) =>
+        //             origin.toLowerCase() === url.toLowerCase() ||
+        //             (url.includes('localhost') && origin.includes('localhost'))
+        //     );
 
-            if (allowed) callback(null, origin);
-            else callback(null, false);
-        },
+        //     if (allowed) callback(null, origin);
+        //     else callback(null, false);
+        // },
         credentials: false,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
