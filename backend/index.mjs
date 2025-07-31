@@ -6,9 +6,11 @@ import route from './src/routes/route.mjs';
 
 
 const app = express();
+// console.log("Test Log......")
 app.use((req, res, next) => {
     if (req.method === 'OPTIONS') {
         console.log("OPTIONS Request Reached Backend ::", req.headers.origin);
+        res.send("OPTIONS Request Reached Backend ::", req.headers.origin)
     }
     next();
 });
