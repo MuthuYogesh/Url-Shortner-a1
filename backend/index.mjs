@@ -6,6 +6,12 @@ import route from './src/routes/route.mjs';
 
 
 const app = express();
+app.use((req, res, next) => {
+    if (req.method === 'OPTIONS') {
+        console.log("OPTIONS Request Reached Backend ::", req.headers.origin);
+    }
+    next();
+});
 app.use(express.json());
 
 const allowedOrigins = [feUrlDev, feUrlProd];
