@@ -18,6 +18,7 @@ const allowedOrigins = [feUrlDev, feUrlProd];
 
 app.use(cors({
     origin: (origin, callback) => {
+        console.log(origin);
         if (!origin) return callback(null, true); // allow server-to-server/curl
 
         const allowed = allowedOrigins.some((url) =>
